@@ -7,6 +7,8 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from scipy.ndimage import maximum_filter, gaussian_filter
+tf.compat.v1.disable_eager_execution()
+
 
 import common
 from common import CocoPairsNetwork, CocoPairs, CocoPart
@@ -102,7 +104,7 @@ class PoseEstimator:
         'idx1', 'idx2',
         'coord1', 'coord2',
         'score1', 'score2'
-    ], verbose=False)
+    ])
 
     def __init__(self):
         pass
@@ -252,13 +254,13 @@ class TfPoseEstimator:
         self.target_size = target_size
 
         # load graph
-        with tf.gfile.GFile(graph_path, 'rb') as f:
-            graph_def = tf.GraphDef()
+        with tf.io.gfile.GFile(graph_path, 'rb') as f:
+            graph_def = tf.compat.v1.GraphDef()
             graph_def.ParseFromString(f.read())
 
-        self.graph = tf.get_default_graph()
+        self.graph = tf.compat.v1.get_default_graph()
         tf.import_graph_def(graph_def, name='TfPoseEstimator')
-        self.persistent_sess = tf.Session(graph=self.graph)
+        self.persistent_sess = tf.compat.v1.Session(graph=self.graph)
 
         # for op in self.graph.get_operations():
         #     print(op.name)

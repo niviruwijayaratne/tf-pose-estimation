@@ -28,7 +28,7 @@ if __name__ == '__main__':
     parser.add_argument('--model', type=str, default='mobilenet_thin_432x368', help='cmu_640x480 / cmu_640x360 / mobilenet_thin_432x368')
     parser.add_argument('--scales', type=str, default='[None]', help='for multiple scales, eg. [1.0, (1.1, 0.05)]')
     args = parser.parse_args()
-    scales = ast.literal_eval(scales)
+    # scales = ast.literal_eval(scales)
 
     w, h = model_wh(args.model)
     e = TfPoseEstimator(get_graph_path(args.model), target_size=(w, h))
