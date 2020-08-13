@@ -15,27 +15,28 @@ _CONNECTION = [
 
 app = QtGui.QApplication([])
 graph = gl.GLViewWidget()
+graph.setBackgroundColor(255, 255, 255, 0.49)
 graph.show()
 graph.setWindowTitle('pyqtgraph example: GLSurfacePlot')
 graph.setCameraPosition(distance=6000)
 
 ## Add a grid to the view
 spacing_vector = QtGui.QVector3D(100, 100, 100)
-x = gl.GLGridItem(size=QtGui.QVector3D(1000, 1000, 1))
+x = gl.GLGridItem(size=QtGui.QVector3D(1000, 1000, 1), color=(0, 0, 0, 255))
 x.setSpacing(spacing=spacing_vector)
 x.rotate(90, 1, 0, 0)
 x.scale(2.0, 2.0, 1.0)  # draw grid after surfaces since they may be translucent
 x.translate(1000, 0,1000)
 graph.addItem(x)
 
-y = gl.GLGridItem(size=QtGui.QVector3D(1000, 1000, 1))
+y = gl.GLGridItem(size=QtGui.QVector3D(1000, 1000, 1), color=(0, 0, 0, 255))
 y.setSpacing(spacing=spacing_vector)
 y.rotate(90, 0, 1,0)
 y.scale(2.0, 2.0, 1.0)
 y.translate(0, 1000, 1000)
 graph.addItem(y)
 
-z = gl.GLGridItem(size=QtGui.QVector3D(1000, 1000, 1))
+z = gl.GLGridItem(size=QtGui.QVector3D(1000, 1000, 1), color=(0, 0, 0, 255))
 z.setSpacing(spacing=spacing_vector)
 z.scale(2.0, 2.0, 1.0)
 z.translate(1000, 1000, 0)
