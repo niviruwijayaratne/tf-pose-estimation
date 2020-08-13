@@ -10,8 +10,8 @@ from scipy.ndimage import maximum_filter, gaussian_filter
 tf.compat.v1.disable_eager_execution()
 
 
-import common
-from common import CocoPairsNetwork, CocoPairs, CocoPart
+import tfpose.src.common as common
+from tfpose.src.common import CocoPairsNetwork, CocoPairs, CocoPart
 
 logger = logging.getLogger('TfPoseEstimator')
 logger.setLevel(logging.INFO)
@@ -259,7 +259,7 @@ class TfPoseEstimator:
             graph_def.ParseFromString(f.read())
 
         self.graph = tf.compat.v1.get_default_graph()
-        tf.import_graph_def(graph_def, name='TfPoseEstimator')
+        tf.graph_util.import_graph_def(graph_def, name='TfPoseEstimator')
         self.persistent_sess = tf.compat.v1.Session(graph=self.graph)
 
         # for op in self.graph.get_operations():

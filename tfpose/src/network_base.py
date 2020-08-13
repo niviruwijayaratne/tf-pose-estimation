@@ -137,7 +137,7 @@ class BaseNetwork(object):
 
     def make_var(self, name, shape, trainable=True):
         '''Creates a new TensorFlow variable.'''
-        return tf.get_variable(name, shape, trainable=self.trainable & trainable, initializer=tf.contrib.layers.xavier_initializer())
+        return tf.get_variable(name, shape, trainable=self.trainable & trainable, initializer=_init_xavier)
 
     def validate_padding(self, padding):
         '''Verifies that the padding is one of the supported ones.'''
