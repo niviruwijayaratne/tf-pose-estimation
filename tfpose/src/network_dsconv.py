@@ -1,4 +1,4 @@
-import network_base
+import tfpose.src.network_base as network_base
 
 
 class DSConvNetwork(network_base.BaseNetwork):

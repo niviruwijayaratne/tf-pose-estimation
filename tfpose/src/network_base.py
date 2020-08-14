@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 import tf_slim as slim
 
-import common
+import tfpose.src.common as common
 
 DEFAULT_PADDING = 'SAME'
 

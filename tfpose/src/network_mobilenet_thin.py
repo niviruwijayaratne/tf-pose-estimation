@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-import network_base
+import tfpose.src.network_base as network_base
 
 
 class MobilenetNetworkThin(network_base.BaseNetwork):

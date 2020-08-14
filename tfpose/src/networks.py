@@ -1,10 +1,10 @@
 import os
 
 import tensorflow as tf
-from network_mobilenet import MobilenetNetwork
-from network_mobilenet_thin import MobilenetNetworkThin
+from tfpose.src.network_mobilenet import MobilenetNetwork
+from tfpose.src.network_mobilenet_thin import MobilenetNetworkThin
 
-from network_cmu import CmuNetwork
+from tfpose.src.network_cmu import CmuNetwork
 
 
 def _get_base_path():
@@ -62,13 +62,13 @@ def get_network(type, placeholder_input, sess_for_load=None, trainable=True):
 
 def get_graph_path(model_name):
     return {
-        'cmu_640x480': './tf_pose/models/graph/cmu_640x480/graph_opt.pb',
-        'cmuq_640x480': './tf_pose/models/graph/cmu_640x480/graph_q.pb',
+        'cmu_640x480': './tfpose/models/graph/cmu_640x480/graph_opt.pb',
+        'cmuq_640x480': './tpose/models/graph/cmu_640x480/graph_q.pb',
 
-        'cmu_640x360': './tf_pose/models/graph/cmu_640x360/graph_opt.pb',
-        'cmuq_640x360': './tf_pose/models/graph/cmu_640x360/graph_q.pb',
+        'cmu_640x360': './tfpose/models/graph/cmu_640x360/graph_opt.pb',
+        'cmuq_640x360': './tfpose/models/graph/cmu_640x360/graph_q.pb',
 
-        'mobilenet_thin_432x368': './tf_pose_1/models/graph/mobilenet_thin_432x368/graph_opt.pb',
+        'mobilenet_thin_432x368': './tfpose/models/graph/mobilenet_thin_432x368/graph_opt.pb',
     }[model_name]
 
 

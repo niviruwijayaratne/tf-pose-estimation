@@ -3,10 +3,32 @@ import pyqtgraph as pg
 import pyqtgraph.opengl as gl
 import numpy as np
 import random
-
+import pyqtgraph.exporters
 from tfpose.src.estimator import TfPoseEstimator
+from tfpose.src.run import get_points
 
 # class Plotter()
+matrix = get_points('tfpose/images/golf.jpg', True)
+points = matrix.T 
+def normalize(matrix):
+    max_val = 0
+    for row in matrix:
+        row = np.squeeze(row)
+        max_elem = abs((max(row, key=abs)))
+        if max_elem > max_val:
+            max_val = max_elem
+    matrix = matrix / max_val
+    return matrix
+
+def webglify(normalized_matrix):
+    arr = []
+    for row in normalized_matrix:
+        row = np.squeeze(row)
+        for elem in row:
+            arr.append(elem)
+    return arr
+
+points = normalize(points)
 
 _CONNECTION = [
         [0, 1], [1, 2], [2, 3], [0, 4], [4, 5], [5, 6], [0, 7], [7, 8],
@@ -15,10 +37,10 @@ _CONNECTION = [
 
 app = QtGui.QApplication([])
 graph = gl.GLViewWidget()
-graph.setBackgroundColor(255, 255, 255, 0.49)
+graph.setBackgroundColor(0, 0, 0, 0.8)
 graph.show()
 graph.setWindowTitle('pyqtgraph example: GLSurfacePlot')
-graph.setCameraPosition(distance=6000)
+graph.setCameraPosition(distance=2)
 
 ## Add a grid to the view
 spacing_vector = QtGui.QVector3D(100, 100, 100)
@@ -44,8 +66,15 @@ graph.addItem(z)
 a = gl.GLAxisItem(size=QtGui.QVector3D(50, 50,50))
 graph.addItem(a)
 
+for point in points:
+    print(point)
+    sca = gl.GLScatterPlotItem(pos=np.array(point.T), color = pg.glColor((255, 0, 0)), size = 20)
+    line = gl.GLLinePlotItem(pos=np.array(point.T), color = pg.glColor((255, 0, 0)), width = 5.0, mode = 'lines')
+    graph.addItem(sca)
+    graph.addItem(line)
 
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
         QtGui.QApplication.instance().exec_()
+

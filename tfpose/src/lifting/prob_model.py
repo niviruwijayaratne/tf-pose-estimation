@@ -6,9 +6,9 @@ Created on Apr 21 13:53 2017
 """
 import numpy as np
 import scipy.io as sio
-from lifting.upright_fast import pick_e
+from tfpose.src.lifting.upright_fast import pick_e
 
-from lifting import config
+from tfpose.src.lifting import config
 
 __all__ = ['Prob3dPose']
 
