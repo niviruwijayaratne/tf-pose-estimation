@@ -8,16 +8,12 @@ from tfpose.src.estimator import TfPoseEstimator
 from tfpose.src.run import get_points
 
 # class Plotter()
-matrix = get_points('tfpose/images/golf.jpg', True)
+matrix = get_points('tfpose/images/p1.jpg', True)
 points = matrix.T 
 def normalize(matrix):
-    max_val = 0
-    for row in matrix:
-        row = np.squeeze(row)
-        max_elem = abs((max(row, key=abs)))
-        if max_elem > max_val:
-            max_val = max_elem
-    matrix = matrix / max_val
+    max_val = np.max(matrix)
+    min_val = np.min(matrix)
+    matrix = ((2*(matrix - min_val))/(max_val - min_val)) - 1
     return matrix
 
 def webglify(normalized_matrix):
@@ -29,6 +25,7 @@ def webglify(normalized_matrix):
     return arr
 
 points = normalize(points)
+print(webglify(points))
 
 _CONNECTION = [
         [0, 1], [1, 2], [2, 3], [0, 4], [4, 5], [5, 6], [0, 7], [7, 8],
@@ -66,12 +63,22 @@ graph.addItem(z)
 a = gl.GLAxisItem(size=QtGui.QVector3D(50, 50,50))
 graph.addItem(a)
 
-for point in points:
-    print(point)
-    sca = gl.GLScatterPlotItem(pos=np.array(point.T), color = pg.glColor((255, 0, 0)), size = 20)
-    line = gl.GLLinePlotItem(pos=np.array(point.T), color = pg.glColor((255, 0, 0)), width = 5.0, mode = 'lines')
-    graph.addItem(sca)
+
+_CONNECTION = [
+        [0, 1], [1, 2], [2, 3], [0, 4], [4, 5], [5, 6], [0, 7], [7, 8],
+        [8, 9], [9, 10], [8, 11], [11, 12], [12, 13], [8, 14], [14, 15],
+        [15, 16]]
+
+for pair in _CONNECTION:
+    ind1 = pair[0]
+    ind2 = pair[1]
+    print(ind1, ind2)
+    p1 = points[ind1].T
+    p2 = points[ind2].T
+    connection = np.array([np.vstack((p1, p2))])
+    line = gl.GLLinePlotItem(pos=connection, color = pg.glColor((0, 255, 0)), width = 5.0, mode = 'lines')
     graph.addItem(line)
+
 
 if __name__ == '__main__':
     import sys
