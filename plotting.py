@@ -8,7 +8,7 @@ from tfpose.src.estimator import TfPoseEstimator
 from tfpose.src.run import get_points
 
 # class Plotter()
-matrix = get_points('tfpose/images/p1.jpg', True)
+matrix = get_points('tfpose/images/IP.jpg', True)
 points = matrix.T 
 def normalize(matrix):
     max_val = np.max(matrix)
