@@ -1,4 +1,4 @@
-# Soccer Mechanics Correction
+# Soccer Mechanics Correction through Pose Estimation
 
 In my opinion, the best soccer players are dominant in 3 categories:
 - Athleticism
