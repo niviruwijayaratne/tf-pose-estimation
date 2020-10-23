@@ -136,7 +136,7 @@ class Prob3dPose:
             poses[:, :, 0] = poses[:, :, 1]
             poses[:, :, 1] = tmp
             return poses
-
+        # print(pose)
         assert (pose_2d.ndim == 3)
         new_pose = pose_2d.copy()
         # new_pose = swap_xy(new_pose)      # not used

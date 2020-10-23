@@ -33,7 +33,7 @@ def get_points(image,plotFlag = False,  model='mobilenet_thin_432x368', ):
     else:
         poseLifting = Prob3dPose('./src/lifting/models/prob_model_params.mat')
     image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
-
+    
     pose_2d_mpiis = []
     visibilities = []
     image_h, image_w = image.shape[:2]
